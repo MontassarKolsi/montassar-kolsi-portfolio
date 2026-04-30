@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://montassar-kolsi.vercel.app/sitemap.xml
+
+# Crawl-delay: 1
