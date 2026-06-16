@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useAnimationPause } from '@/hooks/useAnimationPause';
 
 const skills = ["Git", "GitHub Actions", "MongoDB", "Express", "React", "Node.js", "Vite", "Tailwind CSS", "JWT", "GSAP"];
-const skills2 = ["HTML", "CSS", "JS", "PHP", "PostgreSQL", "C", "C++", "Java", "Python"];
+const skills2 = ["HTML", "CSS", "JS", "TS", "PHP", "PostgreSQL", "C", "C++", "Java", "Python"];
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/MontassarKolsi", label: "GitHub" },

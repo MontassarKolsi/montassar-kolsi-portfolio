@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
-const certificates = [
+const on_sites = [
   "certif_web",
   "tcpc_certif",
   "tcpc_certif_g",
@@ -14,6 +14,15 @@ const certificates = [
   "ai_certif",
   "cpu_hackathon_certif"
 ];
+const remotes = [
+  "cyber_sec_cert",
+  "prompt_craft_cert",
+  "gen_ai_cert",
+  "web_cert",
+  "js_cert",
+  "db_cert",
+  "py_cert"
+]
 
 const Modal = memo(({ selected, onClose }) => {
   if (!selected) return null;
@@ -37,8 +46,8 @@ Modal.displayName = "Modal";
 export const Carousel = () => {
   const [selected, setSelected] = useState(null);
 
-  return (
-    <div className="w-full py-20">
+  return (<div className="w-full py-20 flex flex-col md:flex-row gap-10">
+    <div className="w-full p-5">
       <Swiper
         effect="coverflow"
         grabCursor={true}
@@ -62,7 +71,7 @@ export const Carousel = () => {
         modules={[EffectCoverflow, Pagination, Autoplay]}
         className="w-[60vw] max-w-2xl"
       >
-        {certificates.map((cert, i) => (
+        {on_sites.map((cert, i) => (
           <SwiperSlide
             key={i}
             className="w-[260px] md:w-[320px] cursor-pointer"
@@ -71,7 +80,7 @@ export const Carousel = () => {
             <div className="rounded-2xl overflow-hidden shadow-xl">
               <img
                 src={`/certif/${cert}.webp`}
-                
+
                 alt={`Certificate ${i + 1}`}
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -80,8 +89,54 @@ export const Carousel = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-
+      <p className="text-muted-foreground animate-fade-in animation-delay-200 text-center m-8">On-site</p>
       <Modal selected={selected} onClose={() => setSelected(null)} />
     </div>
+    <div className="w-full p-5">
+      <Swiper
+        effect="coverflow"
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView="auto"
+        loop={true}
+        speed={1000}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        coverflowEffect={{
+          rotate: 35,
+          stretch: 20,
+          depth: 180,
+          modifier: 1.5,
+          slideShadows: true,
+          scale: 0.8,
+        }}
+        pagination={{ clickable: true }}
+        modules={[EffectCoverflow, Pagination, Autoplay]}
+        className="w-[60vw] max-w-2xl"
+      >
+        {remotes.map((cert, i) => (
+          <SwiperSlide
+            key={i}
+            className="w-[260px] md:w-[320px] cursor-pointer"
+            onClick={() => setSelected(cert)}
+          >
+            <div className="rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src={`/certif/${cert}.webp`}
+
+                alt={`Certificate ${i + 1}`}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <p className="text-muted-foreground animate-fade-in animation-delay-200 text-center m-8">Online</p>
+      <Modal selected={selected} onClose={() => setSelected(null)} />
+    </div>
+  </div>
   );
 };
