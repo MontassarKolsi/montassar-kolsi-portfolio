@@ -13,12 +13,13 @@ const SplineFallback = () => (
 
 export const Robot = memo(() => {
   return (
-    <Suspense fallback={<SplineFallback />}>
+    /*<Suspense fallback={<SplineFallback />}>
       <Spline 
         scene="https://prod.spline.design/zGLoZznEgfGCbyxU/scene.splinecode"
         className="gpu-accelerated"
       />
-    </Suspense>
+    </Suspense>*/
+    <></>
   );
 });
 
