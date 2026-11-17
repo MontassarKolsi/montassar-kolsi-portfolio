@@ -23,7 +23,7 @@ const PageLoader = () => (
 function App() {
   return (
     <div className="min-h-screen overflow-x-hidden">
-      {/* <CustomCursor /> */}
+      <CustomCursor />
       <Navbar />
       <main id="main-content" tabIndex="-1">
         <ScrollToTop />
