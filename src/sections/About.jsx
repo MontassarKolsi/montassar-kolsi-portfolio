@@ -1,43 +1,6 @@
-import { memo, lazy, Suspense, useEffect, useRef, useState } from "react";
+import { Robot } from "@/components/Robot";
 
-// Lazy load Robot component
-const Robot = lazy(() => import("@/components/Robot").then(mod => ({ default: mod.Robot })));
-
-const RobotFallback = () => (
-  <div className="w-full h-full flex items-center justify-center">
-    <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin" role="status">
-      <span className="sr-only">Loading 3D robot...</span>
-    </div>
-  </div>
-);
-
-export const About = memo(() => {
-  const [shouldLoadRobot, setShouldLoadRobot] = useState(false);
-  const robotRef = useRef(null);
-
-  useEffect(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      if (entries[0].isIntersecting) {
-        // Wait for browser idle time
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(() => setShouldLoadRobot(true), { timeout: 2000 });
-        } else {
-          setTimeout(() => setShouldLoadRobot(true), 200);
-        }
-        observer.disconnect();
-      }
-    },
-    { rootMargin: '400px' }
-  );
-
-  if (robotRef.current) {
-    observer.observe(robotRef.current);
-  }
-
-  return () => observer.disconnect();
-}, []);
-
+export const About = () => {
   return (
     <section id="about" className="py-24 relative overflow-hidden content-visibility-auto" aria-label="About section">
       <div className="text-center mx-auto max-w-3xl mb-16">
@@ -76,14 +39,10 @@ export const About = memo(() => {
           </div>
 
         </div>
-        <div ref={robotRef} className="absolute inset-0 flex items-center -top-60 -bottom-60 md:-left-60 md:-right-60 justify-center opacity-40 " aria-hidden="true">
-          {shouldLoadRobot ? (
-            <Suspense fallback={<RobotFallback />}>
-              <Robot />
-            </Suspense>
-          ) : (
-            <RobotFallback />
-          )}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-64 h-64 md:w-80 md:h-80 pointer-events-auto">
+            <Robot />
+          </div>
         </div>
       </div>
       <div className="glass rounded-2xl p-6 glow-border animate-fade-in animation-delay-300">
@@ -93,6 +52,6 @@ export const About = memo(() => {
       </div>
     </section>
   );
-});
+};
 
 About.displayName = 'About';
